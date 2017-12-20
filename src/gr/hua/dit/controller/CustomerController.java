@@ -27,19 +27,19 @@ public class CustomerController {
 		
 		// get customers from the service
 		List<Customer> customers = customerService.getCustomers();
-		
+		System.out.println("Customers : " + customers);
 		// add the customers to the model
-		model.addAttribute("customers",customers);
+		model.addAttribute("custs",customers);
 		
 		// add page title
 		model.addAttribute("pageTitle", "List Customers");
 		return "list-customers";
 	}
 	
-	@GetMapping("/{id}")
-	public String getCustomer(Model model, @PathVariable("id") int id) {
+	@GetMapping("/{IdentityNumber}")
+	public String getCustomer(Model model, @PathVariable("IdentityNumber") int IdentityNumber) {
 		// get the customer
-		Customer customer = customerService.getCustomer(id);
+		Customer customer = customerService.getCustomer(IdentityNumber);
 		
 		model.addAttribute("customer", customer);
 		

@@ -6,16 +6,28 @@
 
 	<form:form action="saveCustomer" modelAttribute="customer" method="POST" class="ui form">
 		<div class="field">
-			<label>First Name</label> 
-			<form:input path="firstName"/>
+			<label>IdentityNumber</label> 
+			<form:input path="IdentityNumber"/>
 		</div>
 		<div class="field">
-			<label>Last Name</label>
-			<form:input path="lastName"/>
+			<label>Name</label>
+			<form:input path="Name"/>
 		</div>
 		<div class="field">
-			<label>Email</label> 
-			<form:input path="email"/>
+			<label>Surname</label> 
+			<form:input path="Surname"/>
+		</div>
+		<div class="field">
+			<label>TaxNumber</label> 
+			<form:input path="TaxNumber"/>
+		</div>
+		<div class="field">
+			<label>DateCarLicence</label> 
+			<form:input path="DateCarLicence"/>
+		</div>
+		<div class="field">
+			<label>History</label> 
+			<form:input path="History"/>
 		</div>
 		<button class="ui button" type="submit">Save</button>
 	</form:form>

@@ -28,18 +28,18 @@ public class CustomerApiController {
 	@Autowired
 	private CustomerList customerList;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
-	public Customer getCustomer(@PathVariable("id") int id) {
+	@RequestMapping(value = "/{IdentityNumber}", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
+	public Customer getCustomer(@PathVariable("IdentityNumber") int IdentityNumber) {
 
-		Customer customer = customerService.getCustomer(id);
+		Customer customer = customerService.getCustomer(IdentityNumber);
 		System.out.println("customer :" + customer);
 
 		return customer;
 	}
 
-	@RequestMapping(value="/delete/{id}", method= RequestMethod.DELETE, produces = { "application/json", "application/xml" })
-	public ResponseEntity deleteCustomer(@PathVariable("id") int id) {
-		customerService.deleteCustomer(id);
+	@RequestMapping(value="/delete/{IdentityNumber}", method= RequestMethod.DELETE, produces = { "application/json", "application/xml" })
+	public ResponseEntity deleteCustomer(@PathVariable("IdentityNumber") int IdentityNumber) {
+		customerService.deleteCustomer(IdentityNumber);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
@@ -53,9 +53,11 @@ public class CustomerApiController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json", "application/xml" })
-	public Customer createCustomer(@RequestParam("firstName") String firstName,
-			@RequestParam("lastName") String lastName, @RequestParam("email") String email) {
-		Customer customer = new Customer(firstName, lastName, email);
+	public Customer createCustomer(@RequestParam("IdentityNumber") String IdentityNumber,
+			@RequestParam("Name") String Name, @RequestParam("Surname") String Surname,@RequestParam("TaxNumber") String TaxNumber, @RequestParam("DateCarLicence") String DateCarLicence, @RequestParam("History") String History) {
+		int TaxNumber1=Integer.parseInt(TaxNumber);
+		Customer customer = new Customer(IdentityNumber, Name, Surname, TaxNumber1,DateCarLicence, History);
+		
 		customerService.saveCustomer(customer);
 		return customer;
 

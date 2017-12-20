@@ -22,7 +22,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// create a query
-		Query<Customer> query = currentSession.createQuery("from Customer order by lastName", 
+		Query<Customer> query = currentSession.createQuery("from Customer order by IdentityNumber", 
 				Customer.class);
 		
 		
@@ -44,23 +44,23 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public Customer getCustomer(int id) {
+	public Customer getCustomer(int IdentityNumber) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		//get and return Customer
-		Customer customer = currentSession.get(Customer.class, id);
+		Customer customer = currentSession.get(Customer.class, IdentityNumber);
 		return customer;
 	}
 
 	@Override
-	public void deleteCustomer(int id) {
+	public void deleteCustomer(int IdentityNumber) {
 		
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		// find the customer
-		Customer customer = currentSession.get(Customer.class, id);
+		Customer customer = currentSession.get(Customer.class, IdentityNumber);
 
 		
 		// delete customer

@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Customer")
 @Entity
-@Table(name = "customer")
+@Table(name = "Customers")
 public class Customer implements Serializable {
 
 	/**
@@ -25,68 +25,134 @@ public class Customer implements Serializable {
 	 * 
 	 */
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
-
-	@Column(name = "first_name")
-	private String firstName;
-
-	@Column(name = "last_name")
-	private String lastName;
-
-	@Column(name = "email")
-	private String email;
 	
+	
+	 @Id
+	   @Column(name = "IdentityNumber")
+	   private String identityNumber;
+
+	   @Column(name = "Name")
+	   private String name;
+
+	   @Column(name = "Surname")
+	   private String surname;
+
+	   @Column(name = "TaxNumber")
+	   private int taxNumber;
+	   
+	   @Column(name="DateCarLicence")
+	   private String DateCarLicence;
+	   
+	   @Column(name = "History")
+	   private String history;
+	   
+	   
+
+	
+	public Customer(String identityNumber, String name, String surname, int taxNumber, String dateCarLicence,
+			String history) {
+		super();
+		this.identityNumber = identityNumber;
+		this.name = name;
+		this.surname = surname;
+		this.taxNumber = taxNumber;
+		DateCarLicence = dateCarLicence;
+		this.history = history;
+	}
+
+
+
+
 	public Customer() {
 		
 	}
 
-	public Customer(String firstName, String lastName, String email) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
+
+
+
+	public String getIdentityNumber() {
+		return identityNumber;
 	}
 
-	public int getId() {
-		return id;
+
+
+
+	public void setIdentityNumber(String identityNumber) {
+		this.identityNumber = identityNumber;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+
+
+	public String getName() {
+		return name;
 	}
 
-	public String getFirstName() {
-		return firstName;
+
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+
+
+	public String getSurname() {
+		return surname;
 	}
 
-	public String getLastName() {
-		return lastName;
+
+
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+
+
+	public int getTaxNumber() {
+		return taxNumber;
 	}
 
-	public String getEmail() {
-		return email;
+
+
+
+	public void setTaxNumber(int taxNumber) {
+		this.taxNumber = taxNumber;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+
+
+
+	public String getDateCarLicence() {
+		return DateCarLicence;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+
+
+
+	public void setDateCarLicence(String dateCarLicence) {
+		DateCarLicence = dateCarLicence;
 	}
+
+
+
+
+	public String getHistory() {
+		return history;
+	}
+
+
+
+
+	public void setHistory(String history) {
+		this.history = history;
+	}
+
 	
 	
 
+	   
 }
