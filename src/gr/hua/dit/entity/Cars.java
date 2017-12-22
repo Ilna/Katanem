@@ -27,8 +27,7 @@ public class Cars implements Serializable {
 
 	
 	
-	 @Id
-	 
+	   @Id
 	   @Column(name = "Plates")
 	   private String plates;
 
