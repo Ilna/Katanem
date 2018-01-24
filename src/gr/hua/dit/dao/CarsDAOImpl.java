@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import gr.hua.dit.entity.Cars;
 
+import gr.hua.dit.entity.Customer;
+
+
 
 @Repository
 public class CarsDAOImpl implements CarsDAO {
@@ -47,7 +50,7 @@ public class CarsDAOImpl implements CarsDAO {
 		// get current hibernate session
 				Session currentSession = sessionFactory.getCurrentSession();
 				
-				//get and return Customer
+				//get and return Car
 				Cars cars = currentSession.get(Cars.class, plates);
 				return cars;
 	}
@@ -63,6 +66,26 @@ public class CarsDAOImpl implements CarsDAO {
 				
 				// delete customer
 				currentSession.delete(cars);
+	}
+
+	@Override
+	public List<Cars> getNotCustomerCars(String ownerId) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		List<Cars> cars = currentSession.createQuery("from cars c where c.customer!="+ownerId).getResultList();
+		System.out.println("not customer car " + cars);
+		return cars;
+	}
+
+	@Override
+	public List<Cars> getCustomerCars(String ownerId) {
+      
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Customer customer = (Customer) currentSession.createQuery("from  Customer where identityNumber = " +ownerId).getSingleResult();
+		System.out.println("Customer car " + customer.getCars());
+
+		return customer.getCars();
 	}
 
 }

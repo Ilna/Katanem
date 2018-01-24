@@ -12,4 +12,8 @@ public interface CarsService {
 	public Cars getCar(String plates);
 
 	public void deleteCar(String plates);
+	
+	public List<Cars> getNotCustomerCars(String OwnerId);
+	
+	public List<Cars> getCustomerCars(String OwnerId);
 }

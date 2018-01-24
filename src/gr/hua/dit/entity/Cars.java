@@ -1,14 +1,20 @@
 package gr.hua.dit.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @XmlRootElement(name = "Cars")
@@ -43,21 +49,24 @@ public class Cars implements Serializable {
 	   @Column(name="Color")
 	   private String color;
 	   
-	   @Column(name = "OwnerId")
-	   private String ownerId;
+	   @ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE, 
+               CascadeType.DETACH, CascadeType.REFRESH})
+@JoinColumn(name="OwnerId")
+@JsonIgnore
+private Customer customer;
 
+	   
 	public Cars() {
 		super();
 	}
 
-	public Cars(String plates, int year, int cubic, String type, String color, String ownerId) {
+	public Cars(String plates, int year, int cubic, String type, String color) {
 		super();
 		this.plates = plates;
 		this.year = year;
 		this.cubic = cubic;
 		this.type = type;
 		this.color = color;
-		this.ownerId = ownerId;
 	}
 
 	public String getPlates() {
@@ -100,18 +109,19 @@ public class Cars implements Serializable {
 		this.color = color;
 	}
 
-	public String getOwnerId() {
-		return ownerId;
+
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Override
 	public String toString() {
 		return "Cars [plates=" + plates + ", year=" + year + ", cubic=" + cubic + ", type=" + type + ", color=" + color
-				+ ", ownerId=" + ownerId + "]";
+				+ ", ownerId="+ "]";
 	}
 
 		   

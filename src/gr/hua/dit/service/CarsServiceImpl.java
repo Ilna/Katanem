@@ -40,4 +40,16 @@ public class CarsServiceImpl implements CarsService {
 		carsDAO.deleteCar(plates);
 	}
 
+	@Override
+	@Transactional
+	public List<Cars> getNotCustomerCars(String OwnerId) {
+		return carsDAO.getNotCustomerCars(OwnerId);
+	}
+
+	@Override
+	@Transactional
+	public List<Cars> getCustomerCars(String OwnerId) {
+		return carsDAO.getCustomerCars(OwnerId);
+	}
+
 }

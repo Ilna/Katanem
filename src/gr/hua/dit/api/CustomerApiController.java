@@ -22,6 +22,8 @@ import gr.hua.dit.service.CustomerService;
 @RequestMapping("/api/customer")
 public class CustomerApiController {
 
+	private static final Customer Customer = null;
+
 	@Autowired
 	private CustomerService customerService;
 
@@ -29,7 +31,7 @@ public class CustomerApiController {
 	private CustomerList customerList;
 
 	@RequestMapping(value = "/{IdentityNumber}", method = RequestMethod.GET, produces = { "application/json", "application/xml" })
-	public Customer getCustomer(@PathVariable("IdentityNumber") int IdentityNumber) {
+	public Customer getCustomer(@PathVariable("IdentityNumber") String IdentityNumber) {
 
 		Customer customer = customerService.getCustomer(IdentityNumber);
 		System.out.println("customer :" + customer);
@@ -38,7 +40,7 @@ public class CustomerApiController {
 	}
 
 	@RequestMapping(value="/delete/{IdentityNumber}", method= RequestMethod.DELETE, produces = { "application/json", "application/xml" })
-	public ResponseEntity deleteCustomer(@PathVariable("IdentityNumber") int IdentityNumber) {
+	public ResponseEntity deleteCustomer(@PathVariable("IdentityNumber") String IdentityNumber) {
 		customerService.deleteCustomer(IdentityNumber);
 		return new ResponseEntity(HttpStatus.OK);
 	}
@@ -54,9 +56,9 @@ public class CustomerApiController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = { "application/json", "application/xml" })
 	public Customer createCustomer(@RequestParam("IdentityNumber") String IdentityNumber,
-			@RequestParam("Name") String Name, @RequestParam("Surname") String Surname,@RequestParam("TaxNumber") String TaxNumber, @RequestParam("DateCarLicence") String DateCarLicence, @RequestParam("History") String History) {
-		int TaxNumber1=Integer.parseInt(TaxNumber);
-		Customer customer = new Customer(IdentityNumber, Name, Surname, TaxNumber1,DateCarLicence, History);
+			@RequestParam("Name") String Name, @RequestParam("Surname") String Surname,@RequestParam("TaxNumber") int TaxNumber, @RequestParam("DateCarLicence") String DateCarLicence, @RequestParam("History") String History) {
+		
+		Customer customer = new Customer(IdentityNumber, Name, Surname, TaxNumber,DateCarLicence, History);
 		
 		customerService.saveCustomer(customer);
 		return customer;

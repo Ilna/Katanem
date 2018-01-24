@@ -31,14 +31,17 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public Customer getCustomer(int IdentityNumber) {
+	public Customer getCustomer(String IdentityNumber) {
 		return customerDAO.getCustomer(IdentityNumber);
 	}
 
 	@Override
 	@Transactional
-	public void deleteCustomer(int IdentityNumber) {
-		customerDAO.deleteCustomer(IdentityNumber);
+	public void deleteCustomer(String identityNumber) {
+		customerDAO.deleteCustomer(identityNumber);
+		
 	}
+
+	
 
 }

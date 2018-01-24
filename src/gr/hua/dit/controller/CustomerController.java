@@ -5,13 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import gr.hua.dit.entity.Cars;
 
 import gr.hua.dit.entity.Customer;
+
+import gr.hua.dit.service.CarsService;
+
 import gr.hua.dit.service.CustomerService;
 
 @Controller
@@ -21,6 +28,9 @@ public class CustomerController {
 	// inject the customer service
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CarsService carsService;
 	
 	@GetMapping("/list")
 	public String listCustomers(Model model) {
@@ -37,7 +47,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{IdentityNumber}")
-	public String getCustomer(Model model, @PathVariable("IdentityNumber") int IdentityNumber) {
+	public String getCustomer(Model model, @PathVariable("IdentityNumber") String IdentityNumber) {
 		// get the customer
 		Customer customer = customerService.getCustomer(IdentityNumber);
 		
@@ -64,5 +74,25 @@ public class CustomerController {
 		
 		return "redirect:/customer/list";
 	}
+	
+	@GetMapping("/assignCar/{identityNumber}")
+	public String assignCar(Model model,  @PathVariable("identityNumber") String identityNumber) {
+		Customer customer = customerService.getCustomer(identityNumber);
+	    List<Cars> cars=carsService.getNotCustomerCars(identityNumber);
+	    model.addAttribute("cars", cars);
+	    model.addAttribute("customer", customer);
+		return "assign-car";
+	}
+	
+	@PostMapping("/assignCar/{identityNumber}")
+	public String assignCarToCustomer(@PathVariable("identityNumber") String identityNumber, @RequestParam("OwnerId") String OwnerId) {
+		Customer customer = customerService.getCustomer(identityNumber);
+		Cars cars = carsService.getCar(OwnerId);
+		cars.setCustomer(customer);
+		carsService.saveCar(cars);
+		return "redirect:/customer/list";
+	}
 
+	
+	
 }

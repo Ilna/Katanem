@@ -26,8 +26,40 @@
 						<td>${tempCustomer.taxNumber}</td>
 						<td>${tempCustomer.dateCarLicence}</td>
 						<td>${tempCustomer.history}</td>
+						<td><button type="submit" id="${tempCustomer.identityNumber}"
+					name="deleteCustomer"><i class="remove user icon"></i>
+					 Delete</button>
+					 <a
+					href="<c:url value="/customer/${tempCustomer.identityNumber}"></c:url>"><i class="unhide icon"></i>
+					View</a>
+					<a class="ui button" href="<c:url value="/cars/showAddForm/${tempCustomer.identityNumber}"></c:url>"><i
+						class="add circle icon"></i>Create Car</a>
+					<a class="ui button" href="<c:url value="/customer/assignCar/${tempCustomer.identityNumber}"></c:url>"><i
+						class="add user icon"></i>Assign Car</a>
+					<a class="ui button" href="<c:url value="/cars/customer/${tempCustomer.identityNumber}/list"></c:url>"><i
+						class="list icon"></i>List Cars</a>	
 						
 					</tr>
 				</c:forEach>
 			</table>
+			<a class="ui button" href="${pageContext.request.contextPath}/customer/showAddForm" class="item"><i
+						class="add circle icon"></i>Add Customer</a>
+			
 		</div>
+		
+		<script type="text/javascript">
+	$("[name='deleteCustomer']").click(function() {
+		var urlCall = "<c:url value="/api/customer/delete/"></c:url>";
+		$.ajax({
+			url : urlCall + $(this).attr('identityNumber'),
+			type : 'DELETE',
+			success : function(result) {
+				console.log(result);
+				$(location).attr("href", "<c:url value="/customer/list"></c:url>");
+			},
+			error : function(result) {
+				console.log(result);
+			},
+		});
+	});
+</script>

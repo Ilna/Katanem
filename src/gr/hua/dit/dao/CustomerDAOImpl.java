@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import gr.hua.dit.entity.Customer;
 
+
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
 	// inject the session factory
@@ -44,27 +45,28 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public Customer getCustomer(int IdentityNumber) {
+	public Customer getCustomer(String identityNumber) {
 		// get current hibernate session
 		Session currentSession = sessionFactory.getCurrentSession();
 		
 		//get and return Customer
-		Customer customer = currentSession.get(Customer.class, IdentityNumber);
+		Customer customer = currentSession.get(Customer.class, identityNumber);
 		return customer;
 	}
 
-	@Override
-	public void deleteCustomer(int IdentityNumber) {
-		
-		// get current hibernate session
-		Session currentSession = sessionFactory.getCurrentSession();
-		
-		// find the customer
-		Customer customer = currentSession.get(Customer.class, IdentityNumber);
 
-		
-		// delete customer
-		currentSession.delete(customer);
+
+	
+	@Override
+	public void deleteCustomer(String identityNumber) {
+		// get current hibernate session
+				Session currentSession = sessionFactory.getCurrentSession();
+
+				// find the teacher
+				Customer customer = currentSession.get(Customer.class, identityNumber);
+
+				// delete teacher
+				currentSession.delete(customer);		
 	}
 
 }

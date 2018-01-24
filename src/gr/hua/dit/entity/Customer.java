@@ -1,12 +1,17 @@
 package gr.hua.dit.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -46,6 +51,11 @@ public class Customer implements Serializable {
 	   @Column(name = "History")
 	   private String history;
 	   
+	   
+	   @OneToMany(mappedBy="customer",fetch=FetchType.EAGER,
+	             cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+	                        CascadeType.DETACH, CascadeType.REFRESH})
+	    private List<Cars> cars;
 	   
 
 	
@@ -149,6 +159,38 @@ public class Customer implements Serializable {
 
 	public void setHistory(String history) {
 		this.history = history;
+	}
+
+
+	public void add(Cars car) {
+        if(cars == null) {
+            cars = new ArrayList<>();
+        }
+        cars.add(car);
+        car.setCustomer(this);
+    }
+    
+	
+    
+
+	public List<Cars> getCars() {
+		return cars;
+	}
+
+
+
+
+	public void setCars(List<Cars> cars) {
+		this.cars = cars;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "Customer [identityNumber=" + identityNumber + ", name=" + name + ", surname=" + surname + ", taxNumber="
+				+ taxNumber + ", DateCarLicence=" + DateCarLicence + ", history=" + history + "]";
 	}
 
 	

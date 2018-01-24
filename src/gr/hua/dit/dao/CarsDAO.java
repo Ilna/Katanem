@@ -13,5 +13,9 @@ public interface CarsDAO {
 	public Cars getCar(String plates);
 
 	public void deleteCar(String plates);
+
+	public List<Cars> getNotCustomerCars(String ownerId);
+
+	public List<Cars> getCustomerCars(String ownerId);
 	
 }
