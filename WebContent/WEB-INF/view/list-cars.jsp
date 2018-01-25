@@ -1,7 +1,7 @@
 
 
 		<div class="ui segment">
-			<h3>List of Customers</h3>
+			<h3>List of Cars</h3>
 
 			<!--  add our html table here -->
 			<table class="ui celled  striped table">

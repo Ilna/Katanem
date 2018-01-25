@@ -75,24 +75,6 @@ public class CustomerController {
 		return "redirect:/customer/list";
 	}
 	
-	@GetMapping("/assignCar/{identityNumber}")
-	public String assignCar(Model model,  @PathVariable("identityNumber") String identityNumber) {
-		Customer customer = customerService.getCustomer(identityNumber);
-	    List<Cars> cars=carsService.getNotCustomerCars(identityNumber);
-	    model.addAttribute("cars", cars);
-	    model.addAttribute("customer", customer);
-		return "assign-car";
-	}
-	
-	@PostMapping("/assignCar/{identityNumber}")
-	public String assignCarToCustomer(@PathVariable("identityNumber") String identityNumber, @RequestParam("OwnerId") String OwnerId) {
-		Customer customer = customerService.getCustomer(identityNumber);
-		Cars cars = carsService.getCar(OwnerId);
-		cars.setCustomer(customer);
-		carsService.saveCar(cars);
-		return "redirect:/customer/list";
-	}
-
 	
 	
 }

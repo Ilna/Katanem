@@ -2,9 +2,9 @@
 
 <div class="ui segment">
 
-	<h3>Add Car for ${car.customer}</h3>
+	<h3>Add Car for ${cars.customer.name}</h3>
 
-	<form:form action="${pageContext.request.contextPath}/cars/saveCar/${car.customer.identityNumber}" modelAttribute="cars" method="POST" class="ui form">
+	<form:form action="${pageContext.request.contextPath}/cars/saveCar/${cars.customer.identityNumber}" modelAttribute="cars" method="POST" class="ui form">
 		<div class="field">
 			<label>plates</label> 
 			<form:input path="plates"/>

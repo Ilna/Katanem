@@ -26,16 +26,14 @@
 						<td>${tempCustomer.taxNumber}</td>
 						<td>${tempCustomer.dateCarLicence}</td>
 						<td>${tempCustomer.history}</td>
-						<td><button type="submit" id="${tempCustomer.identityNumber}"
+						<td>
+						<button class="ui button" type="submit" id="${tempCustomer.identityNumber}"
 					name="deleteCustomer"><i class="remove user icon"></i>
 					 Delete</button>
-					 <a
-					href="<c:url value="/customer/${tempCustomer.identityNumber}"></c:url>"><i class="unhide icon"></i>
-					View</a>
-					<a class="ui button" href="<c:url value="/cars/showAddForm/${tempCustomer.identityNumber}"></c:url>"><i
+					 <a class="ui button" href="<c:url value="/customer/${tempCustomer.identityNumber}"></c:url>"><i class="unhide icon"></i>
+					Edit Customer</a>
+					<a class="ui button" href="<c:url value="/cars/showAddCarForm/${tempCustomer.identityNumber}"></c:url>"><i
 						class="add circle icon"></i>Create Car</a>
-					<a class="ui button" href="<c:url value="/customer/assignCar/${tempCustomer.identityNumber}"></c:url>"><i
-						class="add user icon"></i>Assign Car</a>
 					<a class="ui button" href="<c:url value="/cars/customer/${tempCustomer.identityNumber}/list"></c:url>"><i
 						class="list icon"></i>List Cars</a>	
 						
